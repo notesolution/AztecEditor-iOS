@@ -36,6 +36,8 @@ class TextListFormatter: ParagraphAttributeFormatter {
 
         let newList = TextList(style: self.listStyle, with: representation)
         
+        newParagraphStyle.removeProperty(ofType: HTMLParagraph.self)
+        
         if newParagraphStyle.lists.isEmpty || increaseDepth {
             newParagraphStyle.insertProperty(newList, afterLastOfType: HTMLLi.self)
         } else {
