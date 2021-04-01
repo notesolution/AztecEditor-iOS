@@ -27,8 +27,11 @@ open class LiFormatter: ParagraphAttributeFormatter {
             newParagraphStyle.setParagraphStyle(paragraphStyle)
         }
         
-        newParagraphStyle.insertProperty(HTMLLi(with: representation), afterLastOfType: TextList.self)
-
+        // Add li only when paragraph is a text list
+        if newParagraphStyle.hasProperty(where: { $0 is TextList }) {
+            newParagraphStyle.insertProperty(HTMLLi(with: representation), afterLastOfType: TextList.self)
+        }
+        
         resultingAttributes[.paragraphStyle] = newParagraphStyle        
 
         return resultingAttributes
